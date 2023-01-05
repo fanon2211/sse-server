@@ -47,7 +47,8 @@ function eventsHandler(request, response, next) {
       'Content-Type': 'text/event-stream',
       'Connection': 'keep-alive',
       'Cache-Control': 'no-cache',
-      'X-Accel-Buffering': 'no'
+      'X-Accel-Buffering': 'no',
+      'Access-Control-Allow-Origin': '*'
     };
     response.writeHead(200, headers);
   
