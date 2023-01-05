@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'https://streamelements.com/overlay/63b6066343235eed30f191dc/o9ytKLB5kjfjyLFfCaUTQ0n9Ku61qGzNomCbeyPeHWht6zrM');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -22,7 +22,8 @@ app.use(function (req, res, next) {
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', false);
+    res.setHeader('Access-Control-Allow-Credentials', "false");
+
 
     // Pass to next layer of middleware
     next();
@@ -43,21 +44,14 @@ app.listen(PORT, () => {
 // ...
 
 function eventsHandler(request, response, next) {
-    // const headers = {
-    //   'Content-Type': 'text/event-stream',
-    //   'Connection': 'keep-alive',
-    //   'Cache-Control': 'no-cache',
-    //   'X-Accel-Buffering': 'no',
-    //   'Access-Control-Allow-Origin': '*'
-    // };
-    var headers = {};
-    // IE8 does not allow domains to be specified, just the *
-    // headers["Access-Control-Allow-Origin"] = req.headers.origin;
-    headers["Access-Control-Allow-Origin"] = "*";
-    headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
-    headers["Access-Control-Allow-Credentials"] = false;
-    headers["Access-Control-Max-Age"] = '86400'; // 24 hours
-    headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+    const headers = {
+      'Content-Type': 'text/event-stream',
+      'Connection': 'keep-alive',
+      'Cache-Control': 'no-cache',
+      'X-Accel-Buffering': 'no',
+      'Access-Control-Allow-Origin': '*'
+    };
+  
     response.writeHead(200, headers);
   
     const data = `data: ${JSON.stringify(facts)}\n\n`;
