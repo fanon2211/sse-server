@@ -46,7 +46,8 @@ function eventsHandler(request, response, next) {
     const headers = {
       'Content-Type': 'text/event-stream',
       'Connection': 'keep-alive',
-      'Cache-Control': 'no-cache'
+      'Cache-Control': 'no-cache',
+      'X-Accel-Buffering': 'no'
     };
     response.writeHead(200, headers);
   
