@@ -43,13 +43,21 @@ app.listen(PORT, () => {
 // ...
 
 function eventsHandler(request, response, next) {
-    const headers = {
-      'Content-Type': 'text/event-stream',
-      'Connection': 'keep-alive',
-      'Cache-Control': 'no-cache',
-      'X-Accel-Buffering': 'no',
-      'Access-Control-Allow-Origin': '*'
-    };
+    // const headers = {
+    //   'Content-Type': 'text/event-stream',
+    //   'Connection': 'keep-alive',
+    //   'Cache-Control': 'no-cache',
+    //   'X-Accel-Buffering': 'no',
+    //   'Access-Control-Allow-Origin': '*'
+    // };
+    var headers = {};
+    // IE8 does not allow domains to be specified, just the *
+    // headers["Access-Control-Allow-Origin"] = req.headers.origin;
+    headers["Access-Control-Allow-Origin"] = "*";
+    headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+    headers["Access-Control-Allow-Credentials"] = false;
+    headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+    headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
     response.writeHead(200, headers);
   
     const data = `data: ${JSON.stringify(facts)}\n\n`;
